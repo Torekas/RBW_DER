@@ -1,6 +1,6 @@
-from turtle import *
 import tkinter as tk
 from tkinter import ttk
+from turtle import *
 
 speed(0)
 bgcolor("skyblue")
@@ -108,6 +108,7 @@ begin_fill()
 circle(125)
 end_fill()
 
+
 # Tree Function
 def tree():
     # Tree trunk
@@ -163,6 +164,8 @@ penup()
 goto(-200, -100)
 pendown()
 tree()
+
+
 # Function to draw a square with a triangle roof
 def draw_square_with_roof(size):
     color("brown")
@@ -186,6 +189,7 @@ def draw_square_with_roof(size):
     end_fill()
 
     end_fill()
+
 
 # Draw first square with roof
 color("brown")
@@ -233,6 +237,7 @@ goto(-295, -90)
 pendown()
 goto(100, -80)
 
+
 def draw_button(x, y, label):
     penup()
     goto(x, y)
@@ -246,6 +251,7 @@ def draw_button(x, y, label):
     color("black")
     write(label, align="center", font=("Arial", 12, "normal"))
 
+
 # Function to create a separate dashboard window
 def create_dashboard():
     dashboard_window = tk.Tk()
@@ -256,17 +262,22 @@ def create_dashboard():
 
     energy_types = ["Solar", "Wind", "Water"]
     selected_energy = tk.StringVar()
-    energy_dropdown = ttk.Combobox(dashboard_window, textvariable=selected_energy, values=energy_types)
+    energy_dropdown = ttk.Combobox(
+        dashboard_window, textvariable=selected_energy, values=energy_types
+    )
     energy_dropdown.pack(pady=10)
 
     def update_energy_type():
         selected_type = selected_energy.get()
         # Implement logic to update the energy type based on the selection
 
-    update_button = ttk.Button(dashboard_window, text="Update Energy Type", command=update_energy_type)
+    update_button = ttk.Button(
+        dashboard_window, text="Update Energy Type", command=update_energy_type
+    )
     update_button.pack(pady=20)
 
     dashboard_window.mainloop()
+
 
 # Call the function to create the dashboard window
 create_dashboard()
