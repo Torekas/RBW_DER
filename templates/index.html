@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Platform</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Set the background color to green -->
+    <style>
+        body {
+            background-color: #28a745; /* Bootstrap green color */
+            color: #fff; /* Set text color to white for better contrast */
+        }
+
+        /* Add frames around example texts */
+        .text-frame {
+            border: 2px solid #fff; /* White border */
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Educational Platform</h1>
+
+        <!-- Example text with expanding frame -->
+        <div class="text-frame mb-4" data-toggle="collapse" data-target="#exampleText1">
+            <h3>Example Text 1</h3>
+            <div id="exampleText1" class="collapse">
+                <p>This is an example text with an expanding frame. You can add more content here.</p>
+            </div>
+        </div>
+
+        <!-- Example text with expanding frame -->
+        <div class="text-frame mb-4" data-toggle="collapse" data-target="#exampleText2">
+            <h3>Example Text 2</h3>
+            <div id="exampleText2" class="collapse">
+                <p>This is an example text with an expanding frame. You can add more content here.</p>
+            </div>
+        </div>
+
+        <!-- Example text with expanding frame -->
+        <div class="text-frame mb-4" data-toggle="collapse" data-target="#exampleText3">
+            <h3>Example Text 3</h3>
+            <div id="exampleText3" class="collapse">
+                <p>This is an example text with an expanding frame. You can add more content here.</p>
+            </div>
+        </div>
+
+        <!-- Example text with expanding frame -->
+        <div class="text-frame mb-4" data-toggle="collapse" data-target="#exampleText4">
+            <h3>Example Text 4</h3>
+            <div id="exampleText4" class="collapse">
+                <p>This is an example text with an expanding frame. You can add more content here.</p>
+            </div>
+        </div>
+
+        <!-- Static Images -->
+        <div class="row">
+            {% for image in images %}
+                <div class="col-md-3 mb-4">
+                    <img src="{{ url_for('static', filename=image) }}" class="img-fluid" alt="{{ image }}">
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Videos -->
+        <div class="mb-4">
+            <h3>Videos</h3>
+
+            <!-- Video 1 -->
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <!-- Video 2 -->
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Link to a static video -->
+        <div class="mb-4">
+            <h3>Static Video</h3>
+            <video width="100%" height="auto" controls>
+                <source src="{{ url_for('static', filename='example_video.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Button to redirect to another site -->
+        <a href="{{ url_for('redirect_to_another_site') }}" target="_blank" class="btn btn-success">Redirect to Another Site</a>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js (required for Bootstrap dropdowns, modals, etc.) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
