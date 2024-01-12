@@ -52,7 +52,7 @@ def submit_quiz_der():
     answers_json = json.dumps(answers, indent=4)
 
     # Define the file path
-    file_path = 'answers.json'
+    file_path = file_path = r'C:\Users\janmi\PycharmProjects\Studies\rbw_der\answers\answers_der.json'
 
     # Write answers to a JSON file
     with open(file_path, 'w') as file:
@@ -75,7 +75,7 @@ def submit_quiz_solar():
     answers_json = json.dumps(answers, indent=4)
 
     # Define the file path
-    file_path = 'answers.json'
+    file_path = r'C:\Users\janmi\PycharmProjects\Studies\rbw_der\answers\answers_solar.json'
 
     # Write answers to a JSON file
     with open(file_path, 'w') as file:
@@ -97,7 +97,7 @@ def submit_quiz_hydro():
     answers_json = json.dumps(answers, indent=4)
 
     # Define the file path
-    file_path = 'answers.json'
+    file_path = r'C:\Users\janmi\PycharmProjects\Studies\rbw_der\answers\answers_hydro.json'
 
     # Write answers to a JSON file
     with open(file_path, 'w') as file:
