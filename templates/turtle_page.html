@@ -3,12 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turtle Page</title>
+    <title>Scenery Layout</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .scenery {
+            position: relative;
+            width: 100%;
+            height: 90%; /* Adjusted for more scenery */
+            background: linear-gradient(to top, #228B22 50%, #87CEEB 50%);
+            overflow: hidden; /* Hide anything that goes outside bounds */
+        }
+        .sun {
+            position: absolute;
+            top: 2%;
+            left: 5%;
+            background-color: #FFD700;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            z-index: 2;
+        }
+        .mountain {
+            position: absolute;
+            bottom: 50%; /* Adjusted to align with the scenery split */
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 150px solid #A9A9A9;
+            z-index: 1;
+        }
+        .mountain:after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 50px solid white;
+            z-index: 2;
+        }
+        .house, .tree {
+            position: absolute;
+            bottom: 0; /* Align with the bottom of the green area */
+            z-index: 3;
+        }
+        .house {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+        }
+        .tree {
+            width: 30px;
+            height: 70px;
+            background-color: brown;
+            z-index: 3;
+        }
+        .tree-top {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: green;
+            border-radius: 50%;
+            top: -35px;
+            left: -5px;
+        }
+        .line {
+            position: absolute;
+            height: 2px;
+            background-color: black;
+            z-index: 2;
+        }
+    </style>
 </head>
 <body>
-    <script src="https://unpkg.com/turtle-turtle"></script>
+    <div class="scenery">
+        <div class="sun"></div>
+        <!-- Mountains are statically placed -->
+        <div class="mountain" style="left: 25%;"></div>
+        <div class="mountain" style="left: 50%;"></div>
+        <div class="mountain" style="left: 75%;"></div>
+    </div>
+
     <script>
-        // The turtle drawing logic will be included dynamically from the Python script
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function createHouseOrTree(className, bottomOffset) {
+            const element = document.createElement('div');
+            element.className = className;
+            if (className === 'tree') {
+                const treetop = document.createElement('div');
+                treetop.className = 'tree-top';
+                element.appendChild(treetop);
+            }
+            element.style.bottom = `${bottomOffset}px`;
+            return element;
+        }
+
+        function placeElementsAndDrawLines() {
+            const scenery = document.querySelector('.scenery');
+            const elements = [];
+            const bottomOffset = 0; // Adjust this value if needed
+
+            // Place houses
+            for (let i = 0; i < 5; i++) {
+                let house = createHouseOrTree('house', bottomOffset);
+                scenery.appendChild(house);
+                elements.push(house);
+            }
+
+            // Place trees
+            for (let i = 0; i < 10; i++) {
+                let tree = createHouseOrTree('tree', bottomOffset);
+                scenery.appendChild(tree);
+            }
+
+            // Randomly place houses
+            elements.forEach(el => {
+                let x = getRandomInt(0, scenery.offsetWidth - 50); // 50 is the width of the house
+                el.style.left = `${x}px`;
+            });
+
+
+
+            // Connect houses with lines
+            for (let i = 0; i < elements.length - 1; i++) {
+                let line = document.createElement('div');
+                line.className = 'line';
+                let start = elements[i].getBoundingClientRect();
+                let end = elements[i + 1].getBoundingClientRect();
+                let length = Math.sqrt(Math.pow(end.x - start.x, 2) + Math.pow(end.y - start.y, 2));
+                let angle = Math.atan2(end.y - start.y, end.x - start.x) * 180 / Math.PI;
+                line.style.width = `${length}px`;
+                line.style.left = `${start.x + window.scrollX + (start.width / 2)}px`;
+                line.style.top = `${start.y + window.scrollY}px`;
+                line.style.transform = `rotate(${angle}deg)`;
+                line.style.transformOrigin = '0 0';
+                scenery.appendChild(line);
+            }
+        }
+
+        window.onload = placeElementsAndDrawLines;
     </script>
 </body>
 </html>
