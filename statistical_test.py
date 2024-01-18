@@ -59,7 +59,7 @@ def verify_answers(answers, keys):
     for question in keys:
         if answers[question] == keys[question]:
             score += 1
-    return score / total
+    return score / total * 100
 
 def verify_answers_list(answers_list, keys):
     results = []
