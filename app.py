@@ -1,6 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for
+from datetime import datetime
 import json
 import os
+from flask import Flask, render_template, request, redirect, url_for
+
+def get_formatted_datetime():
+    now = datetime.now()
+    formatted_datetime = now.strftime("%d-%m-%Y_%H-%M-%S")
+    return formatted_datetime
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -29,7 +36,7 @@ def submit_quiz_wind():
     answers_json = json.dumps(answers, indent=4)
 
 
-    file_path = r'C:\Users\janmi\PycharmProjects\Studies\rbw_der\answers\answers_wind.json'
+    file_path = file_path = os.path.join(answers_dir, 'answers_wind.json')
 
     # Write answers to a JSON file
     with open(file_path, 'w') as file:
@@ -52,7 +59,7 @@ def submit_quiz_der():
     answers_json = json.dumps(answers, indent=4)
 
     # Define the file path
-    file_path = file_path = r'C:\Users\janmi\PycharmProjects\Studies\rbw_der\answers\answers_der.json'
+    file_path = file_path = file_path = os.path.join(answers_dir, 'answers_der.json')
 
     # Write answers to a JSON file
     with open(file_path, 'w') as file:
@@ -75,7 +82,7 @@ def submit_quiz_solar():
     answers_json = json.dumps(answers, indent=4)
 
     # Define the file path
-    file_path = r'C:\Users\janmi\PycharmProjects\Studies\rbw_der\answers\answers_solar.json'
+    file_path = file_path = os.path.join(answers_dir, 'answers_solar.json')
 
     # Write answers to a JSON file
     with open(file_path, 'w') as file:
@@ -97,7 +104,8 @@ def submit_quiz_hydro():
     answers_json = json.dumps(answers, indent=4)
 
     # Define the file path
-    file_path = r'C:\Users\janmi\PycharmProjects\Studies\rbw_der\answers\answers_hydro.json'
+
+    file_path = os.path.join(answers_dir, 'answers.der')
 
     # Write answers to a JSON file
     with open(file_path, 'w') as file:
@@ -110,4 +118,8 @@ def redirect_to_another_site():
     return redirect("https://dzalapino.github.io/DER_Simulation_Build/?fbclid=IwAR1T2MrVAHWCkbZdT6o03T9N_XzuZnayGECUpJJaFh5z5n37Ob2ZK-AxbW8")
 
 if __name__ == '__main__':
+    global answers_dir
+    dt = get_formatted_datetime()
+    answers_dir = os.path.join('answers', dt)
+    os.makedirs(answers_dir)
     app.run(debug=True)
