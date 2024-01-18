@@ -1,0 +1,95 @@
+body {
+    /* background-image: url('www.informatiweb-pro.net/images/tutoriels/virtualisation/vmware/workstation/unity/1-vmware-workstation-sans-unity.jpg'); */
+    /* background-image: url({{ url_for('static', filename='example_image.png') }}); */
+    /* background-image: url('/static/wallpaper.gif'); */
+    /* filter: blur(4px); */
+    /* background-color: #28a745; */ /* Bootstrap green color */
+    color: #fff; /* Set text color to white for better contrast */
+}
+
+/* Add frames around example texts */
+.text-frame {
+    border: 2px solid #fff; /* White border */
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: rgba(70, 70, 70, 0.5);
+}
+
+.frame {
+    background: rgba(70, 70, 70, 0.5);
+    border: 2px solid #fff; /* White border */
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.button {
+    border: 2px solid #fff; /* White border */
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: rgba(70, 70, 70, 0.5);
+}
+
+.button:hover {
+    border: 2px solid #fff; /* White border */
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.button:active {
+    border: 2px solid #fff; /* White border */
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.button:checked {
+    border: 2px solid #fff; /* White border */
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.button:focus {
+    border: 2px solid #fff; /* White border */
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.custom-size {
+    width: 320px;
+}
+
+.wallpaper-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+.wallpaper {
+    background-image: url('/static/wallpaper.gif');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    height: 100%;
+    align-content: stretch;
+    filter: blur(6px);
+}

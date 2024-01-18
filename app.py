@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    images = ['example_image.png', 'example_image2.png']
+    images = ['example_image.png', 'example_image2.png', 'wallpaper.gif']
     return render_template('index.html', images=images)
 
 @app.route('/turtle')

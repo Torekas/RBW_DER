@@ -3,37 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educational Platform</title>
+    <title>DER Educational Platform</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Set the background color to green -->
-    <style>
-        body {
-            background-color: #28a745; /* Bootstrap green color */
-            color: #fff; /* Set text color to white for better contrast */
-        }
-
-        /* Add frames around example texts */
-        .text-frame {
-            border: 2px solid #fff; /* White border */
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-
-        .custom-size {
-            width: 320px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
 </head>
 <body>
+    <div class="wallpaper-container">
+        <p class="wallpaper"></p>
+    </div>
     <div class="container mt-5">
-        <h1 class="mb-4">Educational Platform</h1>
+        <h1 class="mb-4">Distributed Energy Resources</h1>
+        <h2 class="mb-4">Educational Platform</h2>
 
         <!-- Example text with expanding frame -->
         <div class="text-frame mb-4" data-toggle="collapse" data-target="#exampleText1">
@@ -376,34 +361,36 @@
 <!--        </div>-->
 
         <!-- Videos -->
-        <div class="mb-4">
-            <h3>Videos</h3>
+        <div class="frame">
+            <div class="mb-4">
+                <h3>Videos</h3>
 
-            <!-- Video 1 -->
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
+                <!-- Video 1 -->
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
+                </div>
+
             </div>
 
-        </div>
-
-        <div class="mb-4">
-            <!-- Video 2 -->
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
+            <div class="mb-4">
+                <!-- Video 2 -->
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
+                </div>
             </div>
-        </div>
 
-        <!-- Link to a static video -->
-        <div class="mb-4">
-            <h3>Static Video</h3>
-            <video width="100%" height="auto" controls>
-                <source src="{{ url_for('static', filename='example_video.mp4') }}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <!-- Link to a static video -->
+            <div class="mb-4">
+                <h3>Static Video</h3>
+                <video width="100%" height="auto" controls>
+                    <source src="{{ url_for('static', filename='example_video.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
         </div>
 
         <!-- Button to redirect to another site -->
-        <a href="{{ url_for('redirect_to_another_site') }}" target="_blank" class="btn btn-danger">Redirect to Another Site</a>
+        <a href="{{ url_for('redirect_to_another_site') }}" target="_blank" class="btn btn-danger button">Redirect to Another Site</a>
     </div>
 
     <!-- Bootstrap JS and Popper.js (required for Bootstrap dropdowns, modals, etc.) -->
