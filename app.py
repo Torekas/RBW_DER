@@ -205,7 +205,7 @@ def submit_quiz_hydro_prim():
 
 @app.route('/redirect')
 def redirect_to_another_site():
-    return redirect("https://dzalapino.github.io/DER_Simulation_Build/?fbclid=IwAR1T2MrVAHWCkbZdT6o03T9N_XzuZnayGECUpJJaFh5z5n37Ob2ZK-AxbW8")
+    return redirect("https://dzalapino.github.io/DER_Simulation_Build/?fbclid=IwAR28kQfCwoE7AjyDPuDoeSjbcmcQGSE4-j-CSYiJ6w1bb_zgrROTFxCaWAs")
 
 if __name__ == '__main__':
     global answers_dir

@@ -149,34 +149,40 @@ def main():
     # Tkinter Application Setup
     window = tk.Tk()
     window.title("Quiz Results Analysis")
-    window.geometry("800x500")  # Adjusting window size
+    window.geometry("780x600")  # Adjusting window size
 
     # Custom Font for Hypotheses
     customFont = Font(family="Helvetica", size=12, weight="bold")
 
-    # Hypotheses Labels
-    h0_label = tk.Label(window, text="H0: µ1 = µ2 (Null Hypothesis: Means are equal)", font=customFont)
-    h0_label.grid(row=0, column=0, sticky='ew', padx=10, pady=5)
+    # Custom Font for Titles and Hypotheses
+    titleFont = Font(family="Helvetica", size=14, weight="bold")
+    hypothesisFont = Font(family="Helvetica", size=12)
 
-    ha_label = tk.Label(window, text="HA: µ1 ≠ µ2 (Alternative Hypothesis: Means are not equal)", font=customFont)
-    ha_label.grid(row=1, column=0, sticky='ew', padx=10, pady=5)
+    def create_hypothesis_labels():
+        # Two-Tailed Hypotheses Title
+        two_tailed_title = tk.Label(window, text="Two-Tailed Test Hypotheses", font=titleFont)
+        two_tailed_title.grid(row=2, column=0, columnspan=2, sticky='ew', padx=0, pady=5)
 
-    # Define Columns for the Table
-    columns = ('category', 't_statistic', 'p_value', 'decision')
+        # Two-Tailed Hypotheses Labels
+        h0_label_two_tailed = tk.Label(window, text="H0: µ1 = µ2 (Means are equal)", font=hypothesisFont)
+        h0_label_two_tailed.grid(row=3, column=0, columnspan=2, sticky='ew', padx=0, pady=0)
 
-    # Creating a Treeview Widget
-    tree = ttk.Treeview(window, columns=columns, show='headings')
-    tree.heading('category', text='Category')
-    tree.heading('t_statistic', text='T-Statistic')
-    tree.heading('p_value', text='P-Value')
-    tree.heading('decision', text='Decision')
-    tree.column('category', width=150)
-    tree.column('t_statistic', width=200)
-    tree.column('p_value', width=200)
-    tree.column('decision', width=200)
-    tree.grid(row=3, column=0, sticky='nsew', padx=10, pady=10)
+        ha_label_two_tailed = tk.Label(window, text="HA: µ1 ≠ µ2 (Means are not equal)", font=hypothesisFont)
+        ha_label_two_tailed.grid(row=4, column=0, columnspan=2, sticky='ew', padx=0, pady=0)
 
-    # Function to update the table with results
+        # One-Tailed Hypotheses Title
+        one_tailed_title = tk.Label(window, text="One-Tailed Test Hypotheses", font=titleFont)
+        one_tailed_title.grid(row=6, column=0, columnspan=2, sticky='ew', padx=0, pady=5)
+
+        # One-Tailed Hypotheses Labels
+        h0_label_one_tailed = tk.Label(window, text="H0: µ1 = µ2 (Primary mean is equal to Final mean)",
+                                       font=hypothesisFont)
+        h0_label_one_tailed.grid(row=7, column=0, columnspan=2, sticky='ew', padx=0, pady=0)
+
+        ha_label_one_tailed = tk.Label(window, text="HA: µ1 < µ2 (Primary mean is less than Final mean)",
+                                       font=hypothesisFont)
+        ha_label_one_tailed.grid(row=8, column=0, columnspan=2, sticky='ew', padx=0, pady=0)
+
     def update_results():
         # Clear existing data in the table
         for i in tree.get_children():
@@ -184,14 +190,41 @@ def main():
 
         # Add rows to the table from the t_test_results dictionary
         for category, (t_statistic, p_value) in t_test_results.items():
-            decision = "Reject H0" if p_value < 0.05 else "Fail to Reject H0"
-            tree.insert('', tk.END, values=(category, f'{t_statistic:.4f}', f'{p_value:.6f}', decision))
+            # Two-tailed test decision
+            decision_two_tailed = "Reject H0" if p_value < .05 else "Fail to Reject H0"
+
+            # One-tailed test decision (testing if µ1 < µ2)
+            one_tailed_p_value = p_value / 2
+            decision_one_tailed = "Reject H0" if one_tailed_p_value < .025 and t_statistic < 0 else "Fail to Reject H0"
+
+            tree.insert('', tk.END, values=(
+            category, f'{t_statistic:.4f}', f'{p_value:.6f}', decision_two_tailed, f'{one_tailed_p_value:.6f}',
+            decision_one_tailed))
+
+    # Update columns for the Table to include one-tailed test
+    columns = (
+    'category', 't_statistic', 'p_value_two_tailed', 'decision_two_tailed', 'p_value_one_tailed', 'decision_one_tailed')
+
+    # Creating a Treeview Widget
+    tree = ttk.Treeview(window, columns=columns, show='headings')
+    tree.heading('category', text='Category')
+    tree.heading('t_statistic', text='T-Statistic')
+    tree.heading('p_value_two_tailed', text='P-Value (Two-tailed)')
+    tree.heading('decision_two_tailed', text='Decision (Two-tailed)')
+    tree.heading('p_value_one_tailed', text='P-Value (One-tailed)')
+    tree.heading('decision_one_tailed', text='Decision (One-tailed)')
+    tree.column('category', width=80)
+    tree.column('t_statistic', width=80)
+    tree.column('p_value_two_tailed', width=150)
+    tree.column('decision_two_tailed', width=150)
+    tree.column('p_value_one_tailed', width=150)
+    tree.column('decision_one_tailed', width=150)
+    tree.grid(row=5, column=0, padx=10, pady=50)
+    create_hypothesis_labels()
 
     # Button to trigger results update
     update_button = tk.Button(window, text="Show Results", command=update_results)
-    update_button.grid(row=2, column=0, pady=10)
-
-    window.mainloop()
+    update_button.grid(row=9, column=0, pady=8)
 
     window.mainloop()
 
