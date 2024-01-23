@@ -2,46 +2,46 @@ import os
 import json
 from scipy.stats import ttest_rel
 import numpy as np
+from typing import List
+import tkinter as tk
+from tkinter import ttk
+from tkinter.font import Font
 
 # correct answers:
-# TODO: fill with correct answers
 wind = {
     "q1_wind": "C",
     "q2_wind": "C",
-    "q3_wind": "A",
-    "q4_wind": "D",
+    "q3_wind": "D",
+    "q4_wind": "B",
     "q5_wind": "B",
     "q6_wind": "C"
 }
 
-# TODO: fill with correct answers
 hydro = {
-    "q1_hydro": "A",
+    "q1_hydro": "C",
     "q2_hydro": "C",
-    "q3_hydro": "B",
-    "q4_hydro": "A",
-    "q5_hydro": "B",
-    "q6_hydro": "A"
+    "q3_hydro": "A",
+    "q4_hydro": "D",
+    "q5_hydro": "D",
+    "q6_hydro": "B"
 }
 
-# TODO: fill with correct answers
 solar = {
-    "q1_solar": "A",
-    "q2_solar": "A",
-    "q3_solar": "A",
-    "q4_solar": "A",
-    "q5_solar": "A",
+    "q1_solar": "B",
+    "q2_solar": "C",
+    "q3_solar": "C",
+    "q4_solar": "B",
+    "q5_solar": "B",
     "q6_solar": "B"
 }
 
-# TODO: fill with correct answers
 der = {
-    "q1_der": "A",
-    "q2_der": "A",
-    "q3_der": "A",
-    "q4_der": "B",
-    "q5_der": "A",
-    "q6_der": "A"
+    "q1_der": "B",
+    "q2_der": "C",
+    "q3_der": "C",
+    "q4_der": "C",
+    "q5_der": "B",
+    "q6_der": "D"
 }
 
 def read_file_to_json(answers, path):
@@ -68,39 +68,58 @@ def verify_answers_list(answers_list, keys):
         results.append(result)
     return results
 
+
+def Filter(string: list, substr: list) -> list:
+    """Filter strings based on the presence of substrings.
+
+    :param  strings: List of strings to filter.
+    :type strings: List
+    :param substr: List of substrings to check for.
+    :type substr: List
+    :return: List of filtered strings.
+    :rtype: List
+    """
+    return [str for str in string if any(sub in str for sub in substr)]
+
 def main():
-    # List of dirs with answers before using educational platform
-    primary_answers_dirs = ['path1.1']
+    base_dir = r'C:\Users\janmi\PycharmProjects\Studies\rbw_der\answers'
 
-    # List of dirs with answers after using educational platform
-    final_answers_dirs = ['path1.2']
-    # !!! Order of the elements from primary_answers_dirs must match final_answers_dirs !!!
-    # !!! Number of elements from primary_answers_dirs must match final_answers_dirs !!!
-
-    # lists of loaded JSONs
+    # Lists for storing JSON data
     primary_answers_wind = []
     final_answers_wind = []
-
     primary_answers_der = []
     final_answers_der = []
-
     primary_answers_solar = []
     final_answers_solar = []
-
     primary_answers_hydro = []
     final_answers_hydro = []
 
-    # load JSONs
-    for primary_dir in primary_answers_dirs:
-        read_file_to_json(primary_answers_wind, os.path.join("answers", primary_dir, "answers_wind.json"))
-        read_file_to_json(primary_answers_der, os.path.join("answers", primary_dir, "answers_der.json"))
-        read_file_to_json(primary_answers_solar, os.path.join("answers", primary_dir, "answers_solar.json"))
-        read_file_to_json(primary_answers_hydro, os.path.join("answers", primary_dir, "answers_hydro.json"))
-    for final_dir in final_answers_dirs:
-        read_file_to_json(final_answers_wind, os.path.join("answers", final_dir, "answers_wind.json"))
-        read_file_to_json(final_answers_der, os.path.join("answers", final_dir, "answers_der.json"))
-        read_file_to_json(final_answers_solar, os.path.join("answers", final_dir, "answers_solar.json"))
-        read_file_to_json(final_answers_hydro, os.path.join("answers", final_dir, "answers_hydro.json"))
+    # Function to load data from a JSON file
+    def load_json_data(file_path):
+        with open(file_path, 'r') as file:
+            return json.load(file)
+
+    # Loop through each folder and load the JSON data
+    for folder in os.listdir(base_dir):
+        folder_path = os.path.join(base_dir, folder)
+
+        # Check if the path is a directory
+        if os.path.isdir(folder_path):
+            # Load primary and final JSONs for each quiz type
+            for quiz_type in ['wind', 'der', 'solar', 'hydro']:
+                primary_file_path = os.path.join(folder_path, f'answers_{quiz_type}_prim.json')
+                final_file_path = os.path.join(folder_path, f'answers_{quiz_type}.json')
+
+                if os.path.exists(primary_file_path) and os.path.exists(final_file_path):
+                    # Load primary answers
+                    primary_data = load_json_data(primary_file_path)
+                    eval(f'primary_answers_{quiz_type}').append(primary_data)
+
+                    # Load final answers
+                    final_data = load_json_data(final_file_path)
+                    eval(f'final_answers_{quiz_type}').append(final_data)
+
+        # print(folder_path)
 
     # primary_results
     primary_results_wind = verify_answers_list(primary_answers_wind, wind)
@@ -119,19 +138,62 @@ def main():
     final_results_all = final_results_wind + final_results_der + final_results_solar + final_results_hydro
 
     # perform t-tests
-    t_statistic_wind, p_value_wind = ttest_rel(np.array(primary_results_wind), np.array(final_results_wind))
-    t_statistic_der, p_value_der = ttest_rel(np.array(primary_results_der), np.array(final_results_der))
-    t_statistic_solar, p_value_solar = ttest_rel(np.array(primary_results_solar), np.array(final_results_solar))
-    t_statistic_hydro, p_value_hydro = ttest_rel(np.array(primary_results_hydro), np.array(final_results_hydro))
-    t_statistic_total, p_value_total = ttest_rel(np.array(primary_results_total), np.array(final_results_total))
+    t_test_results = {
+        'wind': ttest_rel(np.array(primary_results_wind), np.array(final_results_wind)),
+        'der': ttest_rel(np.array(primary_results_der), np.array(final_results_der)),
+        'solar': ttest_rel(np.array(primary_results_solar), np.array(final_results_solar)),
+        'hydro': ttest_rel(np.array(primary_results_hydro), np.array(final_results_hydro)),
+        'total': ttest_rel(np.array(primary_results_all), np.array(final_results_all))
+    }
 
-    # print test results
-    print(f'{"category:":<10} | {"t_statistic":<15} | {"p_value":<10}')
-    print(f'{"wind:":<10} | {t_statistic_wind:<15.4f} | {p_value_wind:<10.4f}')
-    print(f'{"der:":<10} | {t_statistic_der:<15.4f} | {p_value_der:<10.4f}')
-    print(f'{"solar:":<10} | {t_statistic_solar:<15.4f} | {p_value_solar:<10.4f}')
-    print(f'{"hydro:":<10} | {t_statistic_hydro:<15.4f} | {p_value_hydro:<10.4f}')
-    print(f'{"total:":<10} | {t_statistic_total:<15.4f} | {p_value_total:<10.4f}')
+    # Tkinter Application Setup
+    window = tk.Tk()
+    window.title("Quiz Results Analysis")
+    window.geometry("800x500")  # Adjusting window size
+
+    # Custom Font for Hypotheses
+    customFont = Font(family="Helvetica", size=12, weight="bold")
+
+    # Hypotheses Labels
+    h0_label = tk.Label(window, text="H0: µ1 = µ2 (Null Hypothesis: Means are equal)", font=customFont)
+    h0_label.grid(row=0, column=0, sticky='ew', padx=10, pady=5)
+
+    ha_label = tk.Label(window, text="HA: µ1 ≠ µ2 (Alternative Hypothesis: Means are not equal)", font=customFont)
+    ha_label.grid(row=1, column=0, sticky='ew', padx=10, pady=5)
+
+    # Define Columns for the Table
+    columns = ('category', 't_statistic', 'p_value', 'decision')
+
+    # Creating a Treeview Widget
+    tree = ttk.Treeview(window, columns=columns, show='headings')
+    tree.heading('category', text='Category')
+    tree.heading('t_statistic', text='T-Statistic')
+    tree.heading('p_value', text='P-Value')
+    tree.heading('decision', text='Decision')
+    tree.column('category', width=150)
+    tree.column('t_statistic', width=200)
+    tree.column('p_value', width=200)
+    tree.column('decision', width=200)
+    tree.grid(row=3, column=0, sticky='nsew', padx=10, pady=10)
+
+    # Function to update the table with results
+    def update_results():
+        # Clear existing data in the table
+        for i in tree.get_children():
+            tree.delete(i)
+
+        # Add rows to the table from the t_test_results dictionary
+        for category, (t_statistic, p_value) in t_test_results.items():
+            decision = "Reject H0" if p_value < 0.05 else "Fail to Reject H0"
+            tree.insert('', tk.END, values=(category, f'{t_statistic:.4f}', f'{p_value:.6f}', decision))
+
+    # Button to trigger results update
+    update_button = tk.Button(window, text="Show Results", command=update_results)
+    update_button.grid(row=2, column=0, pady=10)
+
+    window.mainloop()
+
+    window.mainloop()
 
 if __name__=="__main__":
     main()

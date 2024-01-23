@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DER Educational Platform</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Set the background color to green -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="wallpaper-container">
+        <p class="wallpaper"></p>
+    </div>
+    <div class="container mt-5">
+        <h1 class="mb-4">DER Educational Platform - Quizzes</h1>
+
+        <!-- Wind Power Quiz -->
+        <h2 class="mb-4">Wind Power Quiz</h2>
+        <form id="quizForm_wind" method="post" action="/submit_quiz_wind_prim">
+            <h4>Quiz</h4>
+            <div class="question">
+                <p>1. How is the kinetic energy of the wind harnessed in wind power generation?</p>
+                <input type="radio" id="q_w1a" name="q1" value="A" class="prevent-collapse"><label for="q_w1a">A. Using solar panels</label><br>
+                <input type="radio" id="q_w1b" name="q1" value="B" class="prevent-collapse"><label for="q_w1b">B. Through geothermal systems</label><br>
+                <input type="radio" id="q_w1c" name="q1" value="C" class="prevent-collapse"><label for="q_w1c">C. By wind turbines</label><br>
+                <input type="radio" id="q_w1d" name="q1" value="D" class="prevent-collapse"><label for="q_w1d">D. With hydropower plants</label>
+            </div>
+            <div class="question">
+                <p>2. What is a key advantage of wind power over traditional energy sources?</p>
+                <input type="radio" id="q_w2a" name="q2" value="A" class="prevent-collapse"><label for="q_w2a">A. Limited resource availability</label><br>
+                <input type="radio" id="q_w2b" name="q2" value="B" class="prevent-collapse"><label for="q_w2b">B. Reliance on fossil fuels</label><br>
+                <input type="radio" id="q_w2c" name="q2" value="C" class="prevent-collapse"><label for="q_w2c">C. Minimal carbon emissions</label><br>
+                <input type="radio" id="q_w2d" name="q2" value="D" class="prevent-collapse"><label for="q_w2d">D. Expensive installation</label>
+            </div>
+            <div class="question">
+                <p>3. What is the role of an inverter in the solar power generation process?</p>
+                <input type="radio" id="q_w3a" name="q3" value="A" class="prevent-collapse"><label for="q_w3a">A. Converts DC to AC</label><br>
+                <input type="radio" id="q_w3b" name="q3" value="B" class="prevent-collapse"><label for="q_w3b">B. Captures sunlight</label><br>
+                <input type="radio" id="q_w3c" name="q3" value="C" class="prevent-collapse"><label for="q_w3c">C. Creates a carbon footprint</label><br>
+                <input type="radio" id="q_w3d" name="q3" value="D" class="prevent-collapse"><label for="q_w3d">D. Develops solar panels</label>
+            </div>
+            <div class="question">
+                <p>4. What challenge does wind power face in terms of land usage?</p>
+                <input type="radio" id="q_w4a" name="q4" value="A" class="prevent-collapse"><label for="q_w4a">A. Minimal space required</label><br>
+                <input type="radio" id="q_w4b" name="q4" value="B" class="prevent-collapse"><label for="q_w4b">B. High installation costs</label><br>
+                <input type="radio" id="q_w4c" name="q4" value="C" class="prevent-collapse"><label for="q_w4c">C. Low visual impact</label><br>
+                <input type="radio" id="q_w4d" name="q4" value="D" class="prevent-collapse"><label for="q_w4d">D. Proximity to residential areas</label>
+            </div>
+            <div class="question">
+                <p>5. What percentage of total electricity in the United States is supplied by wind turbines?</p>
+                <input type="radio" id="q_w5a" name="q5" value="A" class="prevent-collapse"><label for="q_w5a">A. Under 5%</label><br>
+                <input type="radio" id="q_w5b" name="q5" value="B" class="prevent-collapse"><label for="q_w5b">B. 10%</label><br>
+                <input type="radio" id="q_w5c" name="q5" value="C" class="prevent-collapse"><label for="q_w5c">C. Over 20%</label><br>
+                <input type="radio" id="q_w5d" name="q5" value="D" class="prevent-collapse"><label for="q_w5d">D. No contribution</label>
+            </div>
+            <div class="question">
+                <p>6. What ongoing advancements are mentioned in the text regarding wind power?</p>
+                <input type="radio" id="q_w6a" name="q6" value="A" class="prevent-collapse"><label for="q_w6a">A. Increased noise concerns</label><br>
+                <input type="radio" id="q_w6b" name="q6" value="B" class="prevent-collapse"><label for="q_w6b">B. Reduced efficiency</label><br>
+                <input type="radio" id="q_w6c" name="q6" value="C" class="prevent-collapse"><label for="q_w6c">C. Visual impact improvements</label><br>
+                <input type="radio" id="q_w6d" name="q6" value="D" class="prevent-collapse"><label for="q_w6d">D. Decreased global adoption</label>
+            </div>
+            <input type="submit" id="submitBtn_w" value="Submit Answers" class="prevent-collapse">
+        </form>
+
+        <!-- Solar Power Quiz -->
+        <h2 class="mb-4">Solar Power Quiz</h2>
+        <form id="quizForm_solar" method="post" action="/submit_quiz_solar_prim">
+            <h4>Quiz</h4>
+            <div class="question">
+                <p>1. What is the primary purpose of solar panels in the generation of electricity?</p>
+                <input type="radio" id="q_s1a" name="q1" value="A" class="prevent-collapse"><label for="q_s1a">A. Capture wind energy</label><br>
+                <input type="radio" id="q_s1b" name="q1" value="B" class="prevent-collapse"><label for="q_s1b">B. Absorb thermal energy</label><br>
+                <input type="radio" id="q_s1c" name="q1" value="C" class="prevent-collapse"><label for="q_s1c">C. Harness sunlight energy</label><br>
+                <input type="radio" id="q_s1d" name="q1" value="D" class="prevent-collapse"><label for="q_s1d">D. Convert geothermal energy</label>
+            </div>
+            <div class="question">
+                <p>2. Who discovered the photovoltaic (PV) effect, a crucial aspect of modern solar technology?</p>
+                <input type="radio" id="q_s2a" name="q2" value="A" class="prevent-collapse"><label for="q_s2a">A. Thomas Edison</label><br>
+                <input type="radio" id="q_s2b" name="q2" value="B" class="prevent-collapse"><label for="q_s2b">B. Nikola Tesla</label><br>
+                <input type="radio" id="q_s2c" name="q2" value="C" class="prevent-collapse"><label for="q_s2c">C. Edmond Becquerel</label><br>
+                <input type="radio" id="q_s2d" name="q2" value="D" class="prevent-collapse"><label for="q_s2d">D. Marie Curie</label>
+            </div>
+            <div class="question">
+                <p>3. What is the role of an inverter in the solar power generation process?</p>
+                <input type="radio" id="q_s3a" name="q3" value="A" class="prevent-collapse"><label for="q_s3a">A. Converts DC to AC</label><br>
+                <input type="radio" id="q_s3b" name="q3" value="B" class="prevent-collapse"><label for="q_s3b">B. Captures sunlight</label><br>
+                <input type="radio" id="q_s3c" name="q3" value="C" class="prevent-collapse"><label for="q_s3c">C. Creates a carbon footprint</label><br>
+                <input type="radio" id="q_s3d" name="q3" value="D" class="prevent-collapse"><label for="q_s3d">D. Develops solar panels</label>
+            </div>
+            <div class="question">
+                <p>4. What is a characteristic feature of solar farms?</p>
+                <input type="radio" id="q_s4a" name="q4" value="A" class="prevent-collapse"><label for="q_s4a">A. Short lifespan of solar panels</label><br>
+                <input type="radio" id="q_s4b" name="q4" value="B" class="prevent-collapse"><label for="q_s4b">B. Limited recyclability of materials</label><br>
+                <input type="radio" id="q_s4c" name="q4" value="C" class="prevent-collapse"><label for="q_s4c">C. Connection to household appliances</label><br>
+                <input type="radio" id="q_s4d" name="q4" value="D" class="prevent-collapse"><label for="q_s4d">D. Interconnected solar panels on a large scale</label>
+            </div>
+            <div class="question">
+                <p>5. What remains a challenge to widespread solar adoption?</p>
+                <input type="radio" id="q_s5a" name="q5" value="A" class="prevent-collapse"><label for="q_s5a">A. Geothermal location</label><br>
+                <input type="radio" id="q_s5b" name="q5" value="B" class="prevent-collapse"><label for="q_s5b">B. Weather conditions</label><br>
+                <input type="radio" id="q_s5c" name="q5" value="C" class="prevent-collapse"><label for="q_s5c">C. Recycling efficiency</label><br>
+                <input type="radio" id="q_s5d" name="q5" value="D" class="prevent-collapse"><label for="q_s5d">D. Upfront costs</label>
+            </div>
+            <div class="question">
+                <p>6. As of 2022, which country leads the world in solar power production?</p>
+                <input type="radio" id="q_s6a" name="q6" value="A" class="prevent-collapse"><label for="q_s6a">A. Japan</label><br>
+                <input type="radio" id="q_s6b" name="q6" value="B" class="prevent-collapse"><label for="q_s6b">B. China</label><br>
+                <input type="radio" id="q_s6c" name="q6" value="C" class="prevent-collapse"><label for="q_s6c">C. Germany</label><br>
+                <input type="radio" id="q_s6d" name="q6" value="D" class="prevent-collapse"><label for="q_s6d">D. United States</label>
+            </div>
+            <input type="submit" id="submitBtn_s" value="Submit Answers" class="prevent-collapse">
+        </form>
+
+        <!-- Hydro Power Quiz -->
+        <h2 class="mb-4">Hydro Power Quiz</h2>
+        <form id="quizForm_hydro" method="post" action="/submit_quiz_hydro_prim">
+            <h4>Quiz</h4>
+            <div class="question">
+                <p>1. What is the primary source of energy in hydropower generation?</p>
+                <input type="radio" id="q_h1a" name="q1" value="A" class="prevent-collapse"><label for="q_h1a">A. Wind</label><br>
+                <input type="radio" id="q_h1b" name="q1" value="B" class="prevent-collapse"><label for="q_h1b">B. Flowing water</label><br>
+                <input type="radio" id="q_h1c" name="q1" value="C" class="prevent-collapse"><label for="q_h1c">C. Solar radiation</label><br>
+                <input type="radio" id="q_h1d" name="q1" value="D" class="prevent-collapse"><label for="q_h1d">D. Geothermal heat</label>
+            </div>
+            <div class="question">
+                <p>2. How do hydropower facilities contribute to the electricity grid?</p>
+                <input type="radio" id="q_h2a" name="q2" value="A" class="prevent-collapse"><label for="q_h2a">A. By using fossil fuels</label><br>
+                <input type="radio" id="q_h2b" name="q2" value="B" class="prevent-collapse"><label for="q_h2b">B. By converting wind energy</label><br>
+                <input type="radio" id="q_h2c" name="q2" value="C" class="prevent-collapse"><label for="q_h2c">C. By harnessing kinetic energy from water</label><br>
+                <input type="radio" id="q_h2d" name="q2" value="D" class="prevent-collapse"><label for="q_h2d">D. By harnessing alternative energy from water</label>
+            </div>
+            <div class="question">
+                <p>3. What role do turbines and generators play in hydropower generation?</p>
+                <input type="radio" id="q_h3a" name="q3" value="A" class="prevent-collapse"><label for="q_h3a">A. Converting sunlight into electricity</label><br>
+                <input type="radio" id="q_h3b" name="q3" value="B" class="prevent-collapse"><label for="q_h3b">B. Harnessing wind energy</label><br>
+                <input type="radio" id="q_h3c" name="q3" value="C" class="prevent-collapse"><label for="q_h3c">C. Converting kinetic energy into electricity</label><br>
+                <input type="radio" id="q_h3d" name="q3" value="D" class="prevent-collapse"><label for="q_h3d">D. Creating perpetual motion</label>
+            </div>
+            <div class="question">
+                <p>4.	What is the term used to describe the unique combination of water volume and elevation change in electricity generation at hydropower plants?</p>
+                <input type="radio" id="q_h4a" name="q4" value="A" class="prevent-collapse"><label for="q_h4a">A. Hydro-cycle</label><br>
+                <input type="radio" id="q_h4b" name="q4" value="B" class="prevent-collapse"><label for="q_h4b">B. Head</label><br>
+                <input type="radio" id="q_h4c" name="q4" value="C" class="prevent-collapse"><label for="q_h4c">C. Run-of-the-river</label><br>
+                <input type="radio" id="q_h4d" name="q4" value="D" class="prevent-collapse"><label for="q_h4d">D. Penstock</label>
+            </div>
+            <div class="question">
+                <p>5. Where are hydropower plants typically located for effective electricity generation?</p>
+                <input type="radio" id="q_h5a" name="q5" value="A" class="prevent-collapse"><label for="q_h5a">A. Deserts</label><br>
+                <input type="radio" id="q_h5b" name="q5" value="B" class="prevent-collapse"><label for="q_h5b">B. Mountainous regions</label><br>
+                <input type="radio" id="q_h5c" name="q5" value="C" class="prevent-collapse"><label for="q_h5c">C. Urban areas</label><br>
+                <input type="radio" id="q_h5d" name="q5" value="D" class="prevent-collapse"><label for="q_h5d">D. Arctic regions</label>
+            </div>
+            <div class="question">
+                <p>6. What component is used in hydropower plants to drive turbines and generate electricity?</p>
+                <input type="radio" id="q_h6a" name="q6" value="A" class="prevent-collapse"><label for="q_h6a">A. Solar panel</label><br>
+                <input type="radio" id="q_h6b" name="q6" value="B" class="prevent-collapse"><label for="q_h6b">B. Penstock</label><br>
+                <input type="radio" id="q_h6c" name="q6" value="C" class="prevent-collapse"><label for="q_h6c">C. Rotor blades</label><br>
+                <input type="radio" id="q_h6d" name="q6" value="D" class="prevent-collapse"><label for="q_h6d">D. Pumped storage system</label>
+            </div>
+            <input type="submit" id="submitBtn_h" value="Submit Answers" class="prevent-collapse">
+        </form>
+
+        <!-- DER Quiz -->
+        <h2 class="mb-4">DER Quiz</h2>
+        <form id="quizForm_der" method="post" action="/submit_quiz_der_prim">
+            <h4>Quiz</h4>
+            <div class="question">
+                <p>1. What distinguishes DER from traditional bulk power transmission systems?</p>
+                <input type="radio" id="q_d1a" name="q1" value="A" class="prevent-collapse"><label for="q_d1a">A. Voltage stability</label><br>
+                <input type="radio" id="q_d1b" name="q1" value="B" class="prevent-collapse"><label for="q_d1b">B. Proximity to end-users</label><br>
+                <input type="radio" id="q_d1c" name="q1" value="C" class="prevent-collapse"><label for="q_d1c">C. Energy storage capacity</label><br>
+                <input type="radio" id="q_d1d" name="q1" value="D" class="prevent-collapse"><label for="q_d1d">D. Power generation efficiency</label>
+            </div>
+            <div class="question">
+                <p>2. Which of the following is NOT mentioned as a component of DER?</p>
+                <input type="radio" id="q_d2a" name="q2" value="A" class="prevent-collapse"><label for="q_d2a">A. Fuel cells</label><br>
+                <input type="radio" id="q_d2b" name="q2" value="B" class="prevent-collapse"><label for="q_d2b">B. Superconducting magnetic energy storage</label><br>
+                <input type="radio" id="q_d2c" name="q2" value="C" class="prevent-collapse"><label for="q_d2c">C. Nuclear reactors</label><br>
+                <input type="radio" id="q_d2d" name="q2" value="D" class="prevent-collapse"><label for="q_d2d">D. Micro-turbines</label>
+            </div>
+            <div class="question">
+                <p>3. What does Distributed Generation (DG) involve in the context of DER?</p>
+                <input type="radio" id="q_d3a" name="q3" value="A" class="prevent-collapse"><label for="q_d3a">A. High-capacity power sources</label><br>
+                <input type="radio" id="q_d3b" name="q3" value="B" class="prevent-collapse"><label for="q_d3b">B. Power sources disconnected from the distribution network</label><br>
+                <input type="radio" id="q_d3c" name="q3" value="C" class="prevent-collapse"><label for="q_d3c">C. Limited-capacity power sources</label><br>
+                <input type="radio" id="q_d3d" name="q3" value="D" class="prevent-collapse"><label for="q_d3d">D. Power sources exclusively connected to the bulk transmission system</label>
+            </div>
+            <div class="question">
+                <p>4. At the local level, what kind of technologies do power plants integrate for DER?</p>
+                <input type="radio" id="q_d4a" name="q4" value="A" class="prevent-collapse"><label for="q_d4a">A. Fossil fuel-based technologies</label><br>
+                <input type="radio" id="q_d4b" name="q4" value="B" class="prevent-collapse"><label for="q_d4b">B. Energy-intensive technologies</label><br>
+                <input type="radio" id="q_d4c" name="q4" value="C" class="prevent-collapse"><label for="q_d4c">C. Nuclear power plants</label><br>
+                <input type="radio" id="q_d4d" name="q4" value="D" class="prevent-collapse"><label for="q_d4d">D. Centralized wind farms</label>
+            </div>
+            <div class="question">
+                <p>5. What is a popular choice for individual energy consumers at the end-point level in DER?</p>
+                <input type="radio" id="q_d5a" name="q5" value="A" class="prevent-collapse"><label for="q_d5a">A. Large-scale hydroelectric plants</label><br>
+                <input type="radio" id="q_d5b" name="q5" value="B" class="prevent-collapse"><label for="q_d5b">B. Modular internal combustion engines</label><br>
+                <input type="radio" id="q_d5c" name="q5" value="C" class="prevent-collapse"><label for="q_d5c">C. Nuclear power plants</label><br>
+                <input type="radio" id="q_d5d" name="q5" value="D" class="prevent-collapse"><label for="q_d5d">D. Centralized wind farms</label>
+            </div>
+            <div class="question">
+                <p>6. In the context of DER, what role does technology advancement play?</p>
+                <input type="radio" id="q_d6a" name="q6" value="A" class="prevent-collapse"><label for="q_d6a">A. Reducing environmental sustainability</label><br>
+                <input type="radio" id="q_d6b" name="q6" value="B" class="prevent-collapse"><label for="q_d6b">B. Decreasing flexibility</label><br>
+                <input type="radio" id="q_d6c" name="q6" value="C" class="prevent-collapse"><label for="q_d6c">C. Limiting reliability</label><br>
+                <input type="radio" id="q_d6d" name="q6" value="D" class="prevent-collapse"><label for="q_d6d">D. Shaping the future of electricity systems</label>
+            </div>
+            <input type="submit" id="submitBtn_d" value="Submit Answers" class="prevent-collapse">
+        </form>
+        <a href="{{ url_for('index') }}" target="_blank" class="btn btn-danger button">To gain more knowledge</a>
+</div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
