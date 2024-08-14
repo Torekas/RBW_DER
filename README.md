@@ -5,7 +5,7 @@ This repository contains the RBW_DER project, a web application built with Pytho
 
 ## Project Structure
 
-```
+
 RBW_DER/
 |-- RBW_DER/
 |   |-- static/
@@ -23,7 +23,6 @@ RBW_DER/
 |-- README.md  # Documentation for the project
 |-- setup.py  # Script for packaging and installing the project (if needed)
 |-- .gitignore  # To ignore unnecessary files and folders like venv
-```
 
 ## Getting Started
 
